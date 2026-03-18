@@ -17,7 +17,7 @@ jobs:
       - run: node generate-manifests.js
       - run: chmod +x ./gradlew
       - run: ./gradlew buildAll
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: KiiPlugins
           path: dist/*.zip
