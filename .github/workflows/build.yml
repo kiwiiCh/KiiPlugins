@@ -15,16 +15,19 @@ jobs:
       - uses: android-actions/setup-android@v2
       - run: yes | sdkmanager --licenses || true
       - run: node generate-manifests.js
-      - name: Install Gradle
+      - name: Setup Gradle Wrapper
         run: |
           wget -q https://services.gradle.org/distributions/gradle-7.6-bin.zip
           unzip -q gradle-7.6-bin.zip
-          export PATH=$PWD/gradle-7.6/bin:$PATH
-          cd KiiPlugins
-          gradle wrapper
+          export GRADLE_HOME=$PWD/gradle-7.6
+          export PATH=$GRADLE_HOME/bin:$PATH
+          gradle wrapper --gradle-version 7.6
           chmod +x ./gradlew
-          ./gradlew build
+      - name: Build plugins
+        run: |
+          export PATH=$PWD/gradle-7.6/bin:$PATH
+          ./gradlew :KiiPlugins:assembleDebug
       - uses: actions/upload-artifact@v4
         with:
           name: KiiPlugins
-          path: KiiPlugins/build/outputs/**/*.aar
+          path: KiiPlugins/build/outputs/aar/*.aar
