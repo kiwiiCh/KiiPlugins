@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 33
+    namespace "com.kii.plugins"
     defaultConfig {
         minSdkVersion 24
         targetSdkVersion 33
@@ -12,6 +13,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+}
+
+repositories {
+    google()
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+    maven { url "https://maven.aliucord.com/snapshots" }
 }
 
 dependencies {
