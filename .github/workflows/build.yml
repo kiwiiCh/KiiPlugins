@@ -22,8 +22,14 @@ jobs:
           export PATH=$PWD/gradle-7.6/bin:$PATH
           gradle wrapper --gradle-version 7.6
           chmod +x ./gradlew
-          ./gradlew tasks --all
+          ./gradlew :KiiPlugins:assembleDebug
+      - name: Find output files
+        run: find . -name "*.aar" -o -name "*.apk" | head -20
       - uses: actions/upload-artifact@v4
         with:
           name: KiiPlugins
-          path: KiiPlugins/build/outputs/**/*.aar
+          path: |
+            KiiPlugins/build/outputs/**/*.aar
+            KiiPlugins/build/**/*.aar
+            **/build/outputs/**/*.aar
+          if-no-files-found: warn
