@@ -1,21 +1,26 @@
-// Root build.gradle
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 33
+    defaultConfig {
+        minSdkVersion 24
+        targetSdkVersion 33
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.20'
+    kotlinOptions { jvmTarget = "11" }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-        maven { url "https://repo.maven.apache.org/maven2" }
-    }
+repositories {
+    google()
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
+
+dependencies {
+    compileOnly "com.github.Aliucord:Aliucord:main-SNAPSHOT"
+    compileOnly 'androidx.annotation:annotation:1.5.0'
 }
